@@ -41,14 +41,6 @@ app.controller('YearController',
 	}
 );
 
-	
-
-
-
-
-
-
-
 app.controller('FirstCtrl', function($scope) {
 		$scope.data = {message: "Hello"};
 	});

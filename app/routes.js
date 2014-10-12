@@ -17,7 +17,7 @@ module.exports = function(app) {
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 			if (err)
 				res.send(err)
-
+			console.log(docs)
 			res.json(docs); // return all todos in JSON format
 		});
 	});
@@ -25,7 +25,7 @@ module.exports = function(app) {
 	// frontend routes =========================================================
 	// route to handle all angular requests
 	app.get('*', function(req, res) {
-		res.sendfile('./public/index.html');
+		res.sendfile('./public/views/home.html');
 	});
 
 };

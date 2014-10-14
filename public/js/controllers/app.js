@@ -1,6 +1,11 @@
 var app = angular.module("MapViz", ['ui-rangeSlider', "leaflet-directive"]);
 
-app.controller("MapController", [ "$scope", "$log", "leafletData", function($scope, $log, leafletData) {
+// Service to transfer Controls Into Map
+app.factory('Slider', function() {
+    return {year: 2012};
+});
+
+app.controller("MapController", [ "$scope", "$log", "leafletData", function($scope, $log, leafletData, Slider) {
     var hardinessTilesUrl = 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/hardiness/2012/{z}/{x}/{y}.png',
     hardinessTilesLayer = new L.TileLayer(hardinessTilesUrl);
     var tilesDict = {
@@ -15,24 +20,22 @@ app.controller("MapController", [ "$scope", "$log", "leafletData", function($sco
             options: {
                 attribution: 'All maps &copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>'
             }
-        },
-	hardiness: { 
-		_2012: { 
-			url: 'mapdata/hardiness/2012/{z}/{x}/{y}.png'
-		}
-	}
+        }
     };
+var i = 0;
+$scope.slider = Slider;
+console.log('Here')
+console.log(Slider)
+console.log($scope.slider);
+$scope.$watch("slider.year", function(value) {
+	console.log("map value " + value);
+});
+
 angular.extend($scope, {
                 usa: {
                     lat: 38,
                     lng: -90,
-                    zoom: 6
-                },
-                markers: {
-                    m1: {
-                        lat: 51.505,
-                        lng: -0.09
-                    }
+                    zoom: 5
                 },
                 layers: {
                     baselayers: {
@@ -42,7 +45,7 @@ angular.extend($scope, {
                             url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                             layerOptions: {
                                 subdomains: ['a', 'b', 'c'],
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors {{slider.year}}',
                                 continuousWorld: true
                             }
                         },
@@ -71,10 +74,10 @@ angular.extend($scope, {
                                 crs: L.CRS.EPSG900913
                             }
                         },
-                        fire: {
-                            name: 'Hardiness',
+                        hardiness: {
+                            name: $scope.year || '2012',
                             type: 'xyz',
-                            url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/hardiness/2012/{z}/{x}/{y}.png',
+                            url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
 			    layerOptions: {
                                 attribution: '&copy; <a href="http://www.openfiremap.org">OpenFireMap</a> contributors - &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                             }
@@ -82,8 +85,6 @@ angular.extend($scope, {
                     }
                 }
             });
-
-
 
     $scope.showLeaflet = function() {
         leafletData.getMap().then(function(map) {
@@ -93,33 +94,26 @@ angular.extend($scope, {
 
 }]);
 
-app.controller('YearController',
-	function YearController($scope, $http) {
+app.controller('YearController',  
+	function YearController($scope, $http, Slider) {
 		// values for the slider
+		console.log(Slider);
+		$scope.slider = Slider;
 		function link($scope) { 
 			$scope.$watch("slider.year", function(value) {
-				console.log('Get this Year: ' + value + ' Data')
 			});
 		}
+		$scope.yearChange = function(){
+			console.log('Geear: ' +$scope.slider.year + ' Data');
+			console.log(Slider);
+		};
 		link($scope)
 		$scope.slider = {
 			year: 2011
 		};
 
-		$http.get('/api/inventory')
-		.success(function(data) {
-			$scope.inventory = data;
-			console.log(data);
-		})
-		.error(function(data) {
-			console.log('Error: ');
-		});
 	}
 );
-
-app.controller('FirstCtrl', function($scope) {
-		$scope.data = {message: "Hello"};
-	});
 
 app.directive('slider', function(){
 	return {
@@ -136,9 +130,4 @@ app.controller('DataController',
 	} 
 );
 
-app.directive('mapSection', function() {
-	return {
-		template: 'Year 2099' //'<div id="map"></div>'
-	}
-});
 

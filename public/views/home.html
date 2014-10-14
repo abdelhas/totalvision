@@ -36,7 +36,7 @@
 </head>
 <body ng-app="MapViz">
     <div ng-controller="MapController">
-    <leaflet id="map" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;" layers="layers"  ></leaflet>
+    <leaflet id="map" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;" model-max="slider.year" layers="layers"></leaflet>
     
         <div id="controlBox">
     	<!-- solid sales graph -->
@@ -53,7 +53,7 @@
                 <div>
                     <div ng-controller="YearController" >
                         <h2>{{"Year " + slider.year}}</h2>
-                        <div range-slider min="2011" max="2091" attach-handle-values="true" step="10" model-max="slider.year" pin-handle="min">Slide</div>
+                        <div range-slider min="2011" max="2091" attach-handle-values="true" step="10" model-max="slider.year" pin-handle="min" ng-mouseup="yearChange()">Slide</div>
                     </div>
                     <button ng-click="showLeaflet()">Fitbounds outside leaflet-directive!</button>
                     <form>
@@ -86,10 +86,7 @@
     <script src="js/angular/angular-leaflet-directive.min.js"></script>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script>
-        var hardinessTilesUrl = '',
-        hardinessTilesLayer = new L.TileLayer(hardinessTilesUrl);
-        map = new L.Map('map');
-        map.addLayer(hardinessTilesLayer);
-    </script>
+    	// create a map in the "map" div, set the view to a given place and zoom
+</script>
 </body>
 </html>

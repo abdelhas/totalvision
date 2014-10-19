@@ -1,9 +1,11 @@
 {
     "description": "", 
-    "bounds": "-140.2734,17.8115,-47.4609,54.2652", 
-    "minzoom": "4", 
+    "center": "0,0,2", 
+    "bounds": "-180,-85.0511,180,85.0511", 
+    "minzoom": "0", 
     "version": "1.0.0", 
-    "template": "", 
-    "maxzoom": "9", 
-    "name": "Hardiness2012"
+    "template": "{{#__location__}}{{/__location__}}{{#__teaser__}}{{{zone}}}{{/__teaser__}}{{#__full__}}{{/__full__}}", 
+    "maxzoom": "8", 
+    "legend": "", 
+    "name": "2012Hardiness"
 }

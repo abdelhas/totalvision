@@ -1,119 +1,164 @@
 var app = angular.module("MapViz", ['ui-rangeSlider', "leaflet-directive"]);
-
 // Service to transfer Controls Into Map
-app.factory('Slider', function() {
-    return {year: 2012};
-});
-
-app.controller("MapController", [ "$scope", "$log", "leafletData", function($scope, $log, leafletData, Slider) {
-    var hardinessTilesUrl = 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/hardiness/2012/{z}/{x}/{y}.png',
-    hardinessTilesLayer = new L.TileLayer(hardinessTilesUrl);
-    var tilesDict = {
-        openstreetmap: {
-            url: "http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png",
-            options: {
-		attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-            }
+app.factory('Slider', function () {
+    var data =
+        {
+            Year: ''
+        };
+    
+    return {
+        getYear: function () {
+            return data.Year;
         },
-        opencyclemap: {
-            url: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-            options: {
-                attribution: 'All maps &copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>'
-            }
+        setYear: function (year) {
+            data.Year = year;
         }
     };
-var i = 0;
-$scope.slider = Slider;
-console.log('Here')
-console.log(Slider)
-console.log($scope.slider);
-$scope.$watch("slider.year", function(value) {
-	console.log("map value " + value);
 });
 
-angular.extend($scope, {
-                usa: {
-                    lat: 38,
-                    lng: -90,
-                    zoom: 5
-                },
-                layers: {
-                    baselayers: {
-                        osm: {
-                            name: 'OpenStreetMap',
-                            type: 'xyz',
-                            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            layerOptions: {
-                                subdomains: ['a', 'b', 'c'],
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors {{slider.year}}',
-                                continuousWorld: true
-                            }
-                        },
-                        cycle: {
-                            name: 'OpenCycleMap',
-                            type: 'xyz',
-                            url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
-                            layerOptions: {
-                                subdomains: ['a', 'b', 'c'],
-                                attribution: '&copy; <a href="http://www.opencyclemap.org/copyright">OpenCycleMap</a> contributors - &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                                continuousWorld: true
-                            }
+
+app.controller('UIController', function($rootScope, $scope, $http, Slider) {
+
+        $scope.yearChange = function(){
+                $scope.$watch('slider.year', function (newValue) {
+                        if (newValue) {
+                                Slider.setYear(newValue);
+                                console.log('New Year: ' + newValue);
                         }
-                    },
-                    overlays: {
-                        hillshade: {
-                            name: 'Hillshade Europa',
-                            type: 'wms',
-                            url: 'http://129.206.228.72/cached/hillshade',
-                            visible: true,
-                            layerOptions: {
-                                layers: 'europe_wms:hs_srtm_europa',
-                                format: 'image/png',
-                                opacity: 0.25,
-                                attribution: 'Hillshade layer by GIScience http://www.osm-wms.de',
-                                crs: L.CRS.EPSG900913
-                            }
-                        },
-                        hardiness: {
-                            name: $scope.year || '2012',
-                            type: 'xyz',
-                            url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
-			    layerOptions: {
-                                attribution: '&copy; <a href="http://www.openfiremap.org">OpenFireMap</a> contributors - &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                            }
-                        }
-                    }
-                }
-            });
+                });
+        };
+        $scope.slider = {
+                year: 2012
+        };
+});
 
-    $scope.showLeaflet = function() {
-        leafletData.getMap().then(function(map) {
-            map.fitBounds([ [40.712, -74.227], [40.774, -74.125] ]);
-        });
-    };
+app.controller("MapController", [ "$scope", "$log", "$http", "leafletData","Slider", function($scope, $log, $http, leafletData, Slider) {
 
-}]);
+// Control Tool
+// Slider Controller
 
-app.controller('YearController',  
-	function YearController($scope, $http, Slider) {
-		// values for the slider
-		console.log(Slider);
-		$scope.slider = Slider;
-		function link($scope) { 
-			$scope.$watch("slider.year", function(value) {
-			});
+// Get the Year into The Map
+var tilesDict = {
+        _2012: {
+            url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+            options: {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+        },
+        _2021: {
+            url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+            options: {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2031: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2041: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2051: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2061: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2071: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2081: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		_2091: {
+		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+		    options: {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		    }
+		},
+		opencyclemap: {
+		    url: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+		    options: {
+			attribution: 'All maps &copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>'
+		    }
 		}
-		$scope.yearChange = function(){
-			console.log('Geear: ' +$scope.slider.year + ' Data');
-			console.log(Slider);
-		};
-		link($scope)
-		$scope.slider = {
-			year: 2011
-		};
+	};
 
-	}
-);
+	angular.extend($scope, {
+			usa: {
+			    lat: 39.5,
+			    lng: -98.35,
+			    zoom: 4
+			},
+			tiles: tilesDict._2012,
+			defaults: {
+			    scrollWheelZoom: false
+			},
+			layers: {
+			    baselayers: {
+				xyz: {
+				    name: '2012 Hardiness',
+				    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
+				    type: 'xyz'
+				}
+			    },
+			overlays: {
+			    demosutfgrid: {
+				    name: 'UTFGrid Interactivity',
+				    type: 'utfGrid',
+				    url: 'http://json2jsonp.com/?url=http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/0/0/0.grid.json&callback={cb}',
+				visible: true,
+	      layerParams: {},
+	      layerOptions: {}
+			    }
+			  }
+			}
+		    });
+
+	$scope.showLeaflet = function() {
+		leafletData.getMap().then(function(map) {
+		    map.fitBounds([ [40.712, -74.227], [40.774, -74.125] ]);
+		});
+	    };
+
+	    $scope.$watch(function () { return Slider.getYear(); }, function (newValue) {
+		if (newValue) {
+			$scope.year = newValue;
+			console.log('Ctrl 2: ' + newValue);	
+			tiles = '_' + newValue;
+			console.log('Tiles: ' + tiles);
+			$scope.tiles = tilesDict[tiles];
+		} else {
+			tiles = 'opencyclemap';
+		};
+	    });
+$scope.zone = "";
+
+$scope.$on('leafletDirectiveMap.utfgridMouseover', function(event, leafletEvent) {
+	$scope.zone = leafletEvent.data.zone;
+    });
+
+$scope.$on('leafletDirectiveMap.utfgridMouseout', function(event, leafletEvent) {
+	$scope.zone = "";
+});
+}]);
 
 app.directive('slider', function(){
 	return {

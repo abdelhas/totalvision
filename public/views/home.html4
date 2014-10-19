@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--Source: http://danzel.github.io/Leaflet.utfgrid/example/map.html//-->
+<html>
+<head>
+	<script src="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.js"></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.css" />
+	<script src="http://danzel.github.io/Leaflet.utfgrid/src/leaflet.utfgrid.js"></script>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div id="map"></div>
+	<script>	
+		var map = L.map('map');
+
+		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/milkator.press_freedom/{z}/{x}/{y}.png', {attribution: 'Map data &copy; 2013 Natural Earth | Data &copy; 2013 <a href="http://www.reporter-ohne-grenzen.de/ranglisten/rangliste-2013/">ROG/RSF</a>', maxZoom: 5}).addTo(map);
+
+		var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: "Map: <a href='http://www.openstreetmap.org/'>&copy | OpenStreetMap </a>contributers"});
+  		var esri = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}.png', {attribution: "Map: <a href='http://www.arcgis.com/home/item.html?id=c4ec722a1cd34cf0a23904aadf8923a0'>ArcGIS - World Physical Map</a>", maxZoom: 8});
+  		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; 2011 OpenStreetMap contributors | Imagery &copy; 2011 CloudMade | Data &copy; 2013 <a href="http://www.reporter-ohne-grenzen.de/ranglisten/rangliste-2013/">ROG/RSF</a>',
+			key: 'BC9A493B41014CAABB98F0471D759707',
+			styleId: 22677
+		});
+
+		var utfGrid = new L.UtfGrid('http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.grid.json?callback=123', {
+			resolution: 4,
+			maxZoom: 5
+		});
+
+		utfGrid.on('mouseover', function(e){ info.update(e);}).on('mouseout', function(e){ info.update();})
+
+		var info = L.control();
+		info.options.position = 'bottomright';
+		info.onAdd = function (map) {
+		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		    this.update();
+		    return this._div;
+		};
+
+		info.update = function (props) {
+			this._div.innerHTML = "<h4>Press Freedom in the world</h4>" +  (props ?
+			"<values><b>" + props.data.name + "</b><br />Ranking position: <rank>" + props.data.rank+"</rank></values>"
+			: 'Hover over a state');
+		};
+		
+		var baseLayers = {
+					"Press Freedom - Mapbox" : mapbox,
+					"OSM - Mapnik" : osm,
+					"OSM - Cloudmade": cloudmade,
+					"World Physical - ESRI" : esri
+				};
+		
+		var layerControl = L.control.layers(baseLayers);
+
+		map.setView([30,0], 2)
+			.addLayer(utfGrid)
+			.addControl(info)
+			.addControl(layerControl);
+		
+	</script>
+	</body>
+</html>

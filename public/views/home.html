@@ -14,7 +14,7 @@
         <!-- Theme style -->
         <link href="css/style.css" rel="stylesheet" type="text/css" />
 	 <link href="css/angular.rangeSlider.css" rel="stylesheet">
-    <style>
+    <style type='text/css'>
         html, body {
             height: 100%;
             width: 100%;
@@ -31,12 +31,57 @@
 			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 			height: 300px;
         }
+  .my-legend {
+    z-index: 5;
+    position: absolute;
+    background: #fff;
+    bottom: 20px;
+    right: 10px;
+    padding: 3px 3px 3px 3px;
+    border: 1px;
+    box-shadow: 2px 2px 1px #888888;
+  }
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 15px;
+    width: 50px;
+    }
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .my-legend a {
+    color: #777;
+    }
     </style>
 
 </head>
 <body ng-app="MapViz">
     <div ng-controller="MapController">
-    <leaflet id="map" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;" model-max="slider.year" layers="layers"></leaflet>
+    <leaflet id="map" layers="layers" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;"></leaflet>
     
         <div id="controlBox">
     	<!-- solid sales graph -->
@@ -50,12 +95,11 @@
 	            </div>
 	        </div>
 	        <div class="box-body border-radius-none">
-                <div>
-                    <div ng-controller="YearController" >
+		<div ng-controller="UIController">
                         <h2>{{"Year " + slider.year}}</h2>
-                        <div range-slider min="2011" max="2091" attach-handle-values="true" step="10" model-max="slider.year" pin-handle="min" ng-mouseup="yearChange()">Slide</div>
-                    </div>
-                    <button ng-click="showLeaflet()">Fitbounds outside leaflet-directive!</button>
+	<div range-slider min="2012" max="2091" attach-handle-values="true" step="10" model-max="slider.year" pin-handle="min" ng-mouseup="yearChange('_2012')"></div>
+<button ng-click="showLeaflet()">Fitbounds outside leaflet-directive!</button>		
+</div>
                     <form>
                         Latitude : <input type="number" step="any" ng-model="london.lat" />
                         Longitude : <input type="number" step="any" ng-model="london.lng" />
@@ -66,11 +110,37 @@
                   </div>                                    
 	        </div><!-- /.box-body -->
 	    </div><!-- /.box --> 
-	   </div>
+	
+	</div>
     </div>
-</body>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 
+<div class='my-legend'>
+<div class='legend-title'>Avg. Annual Extreme Minimum Temperature, °F</div>
+<div class='legend-scale'>
+  <ul class='legend-labels'>
+    <li><span style='background:#d096be'></span>-40 to -35</li>
+    <li><span style='background:#ba99d2'></span>-35 to -30</li>
+    <li><span style='background:#969fe2;'></span>-30 to -25</li>
+    <li><span style='background:#00ade3;'></span>-25 to -20</li>
+    <li><span style='background:#00b2b0;'></span>-20 to -15</li>
+    <li><span style='background:#00b088;'></span>-15 to -10</li>
+    <li><span style='background:#41ab5d;'></span>-10 to -5</li>
+    <li><span style='background:#78c679;'></span>-5 to 0</li>
+    <li><span style='background:#addd8e;'></span>0 to 5</li>
+    <li><span style='background:#ffffe5;'></span>5 to 10</li>
+    <li><span style='background:#fff7bc;'></span>10 to 15</li>
+    <li><span style='background:#ffeda0;'></span>15 to 20</li>
+    <li><span style='background:#fdae6b;'></span>20 to 25</li>
+    <li><span style='background:#f16913;'></span>25 to 30</li>
+    <li><span style='background:#a63603;'></span>30 to 35</li>
+    <li><span style='background:#d94801;'></span>35 to 40</li>
+  </ul>
+</div>
+<div class='legend-source'>Source: <a href="#link to source">Name of source</a></div>
+</div>
+
+</div>
+</body>
         <!-- Angular -->
         <!-- we need jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
@@ -82,9 +152,10 @@
     <script src="js/angular/angular.rangeSlider.js"></script>
     <script src="js/controllers/MainCtrl.js"></script>
     <script src="js/services/InvService.js"></script>
-    <script src="js/controllers/app.js"></script>
     <script src="js/angular/angular-leaflet-directive.min.js"></script>
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/angular/leaflet.utfgrid.js"></script>
+    <script src="js/controllers/app.js"></script>
     <script>
     	// create a map in the "map" div, set the view to a given place and zoom
 </script>

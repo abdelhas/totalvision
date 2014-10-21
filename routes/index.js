@@ -5,5 +5,9 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		res.sendfile('./public/views/home.html');
 	});
+	// route for jsonp
+	app.get('*', function(req, res) { 
+		res.jsonp(req.url);
+	});
 
 };

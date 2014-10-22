@@ -3534,3 +3534,137 @@ fieldset[disabled] .btn-vk.active {
   color: #587ea3;
   background-color: #ffffff;
 }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        #controlBox {
+                z-index: 10;
+                        width: 300px;
+                        background: #000;
+                        position: absolute;
+                        margin-left: auto;
+                        margin-right: auto;
+                        top: 150px;
+            color: black;
+                        border-radius: 10px 10px 10px 10px;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+                        height: 300px;
+        }
+  .map-control-box {
+    z-index: 5;
+    position: absolute;
+
+
+
+ckground: #fff;
+    bottom: 120px;
+    top: 100px;
+    left: 10px;
+    padding: 3px 3px 3px 3px;
+    border: 1px;
+    border-style: solid;
+    border-color: #eee;
+    box-shadow: 1px 1px 0.5px #888888;
+  }
+  .map-control-box .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .plants-filter-box {
+    z-index: 0;
+    position: absolute;
+    background: #fff;
+    bottom: 150px;
+    overflow:scroll;
+    top: 100px;
+    width: 300px;
+    right: 10px;
+    padding: 0px 0px 0px 0px;
+    font-size: 90%;
+    border: 1px;
+    padding: 0px 10px 10px 10px;
+    border-style: solid;
+    border-color: #eee;
+    box-shadow: 1px 1px 0.5px #888888;
+  }
+  .plants-filter-box .legend-title {
+    text-align: left;
+    font-weight: bold;
+    width: 280px;
+    font-size: 100%;
+    position:fixed;
+    background: #fff;
+    z-index:1;
+    background: #;
+    }
+  .my-legend {
+    z-index: 5;
+    position: fixed;
+    background: #fff;
+    bottom: 80px;
+    left: 250px;
+    padding: 3px 3px 3px 3px;
+    border: 1px;
+    border-style: solid;
+    border-color: #fff;
+    box-shadow: 1px 1px 0.5px #888888;
+  }
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 15px;
+    width: 50px;
+    }
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .my-legend a {
+    color: #777;
+    }
+  .range {
+     top: 5px;
+     z-index: 1;
+     position: absolute;
+   }
+  div#header{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:70px;
+  background: #003366;
+  z-index: 120;
+  opacity: 0.9;
+ }
+
+
+
+
+
+

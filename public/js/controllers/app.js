@@ -36,47 +36,50 @@ app.controller("MapController", [ "$scope", "$log", "$http", "leafletData","Slid
 
 // Control Tool
 
+    var tilesDict = {
+        _2012: {
+            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png"
+        },
+	_2041: {
+            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2041/{z}/{x}/{y}.png"
+        },
+	_2070: {
+            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2070/{z}/{x}/{y}.png"
+        },
+	_2099: {
+            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2099/{z}/{x}/{y}.png"
+        },
+        opencyclemap: {
+	    name: 'opencyclemap',
+	    type: 'xyz',
+            url: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+            options: {
+                attribution: 'All maps &copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> (<a href="http://www.openstreetmap.org/copyright">ODbL</a>'
+            }
+        }
+    };
 angular.extend($scope, {
 	usa: {
-	    lat: 39.5,
+	    lat: 33.5,
 	    lng: -98.35,
-	    zoom: 4
+	    zoom: 4,
+	    maxZoom: 8
 	},
 	defaults: {
 	    scrollWheelZoom: false
 	},
-	layers: {
-	    baselayers: {
-		_2012: {
-		    name: '2012 Hardiness',
-		    url: 'http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png',
-		    type: 'xyz'
-		}
-	    },
-	overlays: {
-	    _2012Utf: {
-		    name: '2012 Interactivity',
-		    type: 'utfGrid',
-		    url: 'http://json2jsonp.com/?url=http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.grid.json&callback={cb}',
-		    visible: true,
-	    }
-	  }
-	}
+	tiles: tilesDict._2012
 });
 
-$scope.showLeaflet = function() {
-	leafletData.getMap().then(function(map) {
-	    map.fitBounds([ [40.712, -74.227], [40.774, -74.125] ]);
-	});
-};
 
+//Station 1
 $scope.$watch(function () { return Slider.getYear(); }, function (newValue) {
 	if (newValue) {
 		$scope.year = newValue;
-		console.log('Ctrl 2: ' + newValue);	
-		tiles = '_' + newValue;
-		console.log('Tiles: ' + tiles);
-	//	$scope.tiles = tilesDict[tiles];
+		//console.log('Ctrl 2: ' + newValue);	
+		//console.log('Tiles: ' + tiles);
+	 	console.log('Station1: ' + $scope.year);
+		$scope.tiles = tilesDict['_'+$scope.year];
 	} else {
 		tiles = 'opencyclemap';
 	};
@@ -95,16 +98,10 @@ $scope.$on('leafletDirectiveMap.utfgridMouseout', function(event, leafletEvent) 
 // Leaflet Click Control
 $scope.$on('leafletDirectiveMap.utfgridClick', function (e) {
 });
-// Leaflet Swipe Contro2012 Interactivity    var nw = map.containerPointToLayerPoint([0, 0]),
-        se = map.containerPointToLayerPoint(map.getSize()),
-        clipX = nw.x + (se.x - nw.x) * range.value;
 
-    overlay.getContainer().style.clip = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)';
-  }
 
 
 $scope.swipe = {};
-console.log($scope.map);
 $scope.$watch(function () { return $scope.swipe.range; }, function (newValue) {
         if (newValue) {
                 $scope.swipe.range = newValue;

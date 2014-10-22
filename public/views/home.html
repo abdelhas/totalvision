@@ -14,152 +14,19 @@
         <!-- Theme style -->
         <link href="css/style.css" rel="stylesheet" type="text/css" />
 	 <link href="css/angular.rangeSlider.css" rel="stylesheet">
-    <style type='text/css'>
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-        #controlBox {
-        	z-index: 10;
-			width: 300px;
-			background: #000;
-			position: absolute;
-			margin-left: auto;
-		        margin-right: auto;
-			top: 150px;
-            color: black;
-			border-radius: 10px 10px 10px 10px;
-			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-			height: 300px;
-        }
-  .map-control-box {
-    z-index: 5;
-    position: absolute;
-    background: #fff;
-    bottom: 120px;
-    top: 100px;
-    left: 10px;
-    padding: 3px 3px 3px 3px;
-    border: 1px;
-    border-style: solid;
-    border-color: #eee;
-    box-shadow: 1px 1px 0.5px #888888;
-  }
-  .map-control-box .legend-title {
-    text-align: left;
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 90%;
-    }
-  .plants-filter-box {
-    z-index: 0;
-    position: absolute;
-    background: #fff;
-    bottom: 150px;
-    overflow:scroll;
-    top: 100px;
-    width: 300px;
-    right: 10px;
-    padding: 0px 0px 0px 0px;
-    font-size: 90%;
-    border: 1px;
-    padding: 0px 10px 10px 10px;
-    border-style: solid;
-    border-color: #eee;
-    box-shadow: 1px 1px 0.5px #888888;
-  }
-  .plants-filter-box .legend-title {
-    text-align: left;
-    font-weight: bold;
-    width: 280px;
-    font-size: 100%;
-    position:fixed;
-    background: #fff;
-    z-index:1;
-    background: #;
-    }
-  .my-legend {
-    z-index: 5;
-    position: fixed;
-    background: #fff;
-    bottom: 80px;
-    left: 250px;
-    padding: 3px 3px 3px 3px;
-    border: 1px;
-    border-style: solid;
-    border-color: #fff;
-    box-shadow: 1px 1px 0.5px #888888;
-  }
-  .my-legend .legend-title {
-    text-align: left;
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 90%;
-    }
-  .my-legend .legend-scale ul {
-    margin: 0;
-    padding: 0;
-    float: left;
-    list-style: none;
-    }
-  .my-legend .legend-scale ul li {
-    display: block;
-    float: left;
-    width: 50px;
-    margin-bottom: 6px;
-    text-align: center;
-    font-size: 80%;
-    list-style: none;
-    }
-  .my-legend ul.legend-labels li span {
-    display: block;
-    float: left;
-    height: 15px;
-    width: 50px;
-    }
-  .my-legend .legend-source {
-    font-size: 70%;
-    color: #999;
-    clear: both;
-    }
-  .my-legend a {
-    color: #777;
-    }
-  .range {
-     top: 5px;
-     z-index: 1;
-     position: absolute;
-   }
-  div#header{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:70px;
-  background: #003366;
-  z-index: 120;
-  opacity: 0.9;
- }
-    </style>
 
 </head>
 <body ng-app="MapViz">
 <div id="header"> 
-	<h1 style="color: #ffffff; margin-left:40px;"> Hardiness Map Projections </h1>
-	<h2 style="color: #ffffff; marging-right: 40px;"> About </h2>
+	<h1 style="color: #ffffff; margin-left:40px;"> Hardiness Map Projections For Years 2041, 2070, and 2099 </h1>
 </div>
     <div ng-controller="MapController">
-    <leaflet id="map" layers="layers" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;"></leaflet>
+    <leaflet id="map" tiles="tiles" center="usa" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;"></leaflet>
     	<!-- Control Box -->
 	    <div class="map-control-box">
 		<div ng-controller="UIController">
-                        <h2>{{"Year " + slider.year}}</h2>
-	<div range-slider min="2012" max="2099" attach-handle-values="true" step="29" model-max="slider.year" pin-handle="min" ng-mouseup="yearChange('_2012')"></div>
-<h1>Swipe Control</h1>
-<form>
-	Year 1: <input  /><br />
-	Year 2: <input  />
-</form>
+                        <h4>{{"Hardiness Map For Year " + slider.year}}</h4>
+	<div range-slider min="2012" max="2099" attach-handle-values="true" step="29" model-max="slider.year" pin-handle="min" ng-mouseup="yearChange('{{slider.year}}')"></div>
 </div>
 	    </div><!-- /.box --> 
 <div class='plants-filter-box'>
@@ -167,7 +34,7 @@
 <div style="padding: 5px 5px 5px 5px">
 <p>Type Plant Name or Hardiness Zone:   
 <br />
-<input ng-model="query[queryBy]" />
+<input ng-model="query[queryBy]" value="{{zone}}" ></input>
 </p>
 <table>
 <tr>
@@ -197,6 +64,22 @@
 
 <div class='my-legend'>
 <div class='legend-title'>Avg. Annual Extreme Minimum Temperature, °F</div>
+<span class="tab">3a</span>
+<span class="tab">3b</span>
+<span class="tab">4a</span>
+<span class="tab">4b</span>
+<span class="tab">5a</span>
+<span class="tab">5b</span>
+<span class="tab">6a</span>
+<span class="tab">6b</span>
+<span class="tab">7a</span>
+<span class="tab">7b</span>
+<span class="tab">8a</span>
+<span class="tab">8b</span>
+<span class="tab">9a</span>
+<span class="tab">9b</span>
+<span class="tab">10a</span>
+<span class="tab">10b</span>
 <div class='legend-scale'>
   <ul class='legend-labels'>
     <li><span style='background:#d096be'></span>-40 to -35</li>
@@ -222,8 +105,16 @@
 
 </div>
 
+<div class="help-box">
+<h4>Introduction</h4>
+<p>Single Page Hardiness Map Viewer for the US.</p>
+<p>Use the slider to choose between hardiness map projections for 2041, 2070, 2099.</p>
+<p>Type plant name or hardiness zone to find it.</p>
+<h4>Datasets</h4>
+<a href="https://cds.nccs.nasa.gov/nex/">NASA Earth Exchange (NEX) Downscaled Climate Projections (NEX-DCP30)</a>, <a href="http://planthardiness.ars.usda.gov/PHZMWeb/">USDA Plant Hardiness Zone Map</a>, and <a href="http://www.garden.org/plantfinder/">National Gardening Association PlantFinder</a>
 
 
+</div>
 
 </div>
 </body>

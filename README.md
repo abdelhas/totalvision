@@ -6,3 +6,10 @@
 
 ## Datasets used: 
 <div class='legend-source'>Source: <a href="https://cds.nccs.nasa.gov/nex/">NASA Earth Exchange (NEX) Downscaled Climate Projections (NEX-DCP30)</a>, <a href="http://planthardiness.ars.usda.gov/PHZMWeb/">USDA Plant Hardiness Zone Map</a>, and <a href="http://www.garden.org/plantfinder/">National Gardening Association PlantFinder</a></div>
+
+## Set up:
+At the root directory:
+
+npm install
+
+sudo node server.js

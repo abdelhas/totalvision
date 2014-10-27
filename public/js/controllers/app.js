@@ -38,7 +38,7 @@ app.controller("MapController", [ "$scope", "$log", "$http", "leafletData","Slid
 
     var tilesDict = {
         _2012: {
-            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png"
+            url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2012/{z}/{x}/{y}.png" 
         },
 	_2041: {
             url: "http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/mapdata/2041/{z}/{x}/{y}.png"
@@ -62,11 +62,10 @@ angular.extend($scope, {
 	usa: {
 	    lat: 33.5,
 	    lng: -98.35,
-	    zoom: 4,
-	    maxZoom: 8
+	    zoom: 4
 	},
 	defaults: {
-	    scrollWheelZoom: false
+	    maxZoom: 8
 	},
 	tiles: tilesDict._2012
 });

@@ -65,7 +65,8 @@ angular.extend($scope, {
 	    zoom: 4
 	},
 	defaults: {
-	    maxZoom: 8
+	    maxZoom: 8,
+	    tileLayer: tilesDict._2099
 	},
 	tiles: tilesDict._2012
 });

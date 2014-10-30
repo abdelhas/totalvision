@@ -39,11 +39,11 @@ html, body {
     position: absolute;
     background: #fff;
     bottom: 75px;
-    width: 300px;
     margin-left: 10px;
-    height: 250px;
     opacity: 0.80;
     font-size: 90%;
+    height: 180px;
+    width: 300px;
     border: 1px;
     padding: 0px 10px 10px 10px;
     border-style: solid;
@@ -104,9 +104,13 @@ html, body {
    input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     background-color: #444;
-    bottom: 0;
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
+    background: #999;
+    -webkit-transform: rotate(45deg);
+    top: 75px;
+    left: 25px;
+    box-shadow: -1px -1px 10px -2px rgba(0, 0, 0, 0.5);
   }
   .selection {
    width: 100px;
@@ -123,7 +127,7 @@ html, body {
    background: transparent;
    width: 100px;
    font-size:15pt;
-   color:grey;
+   color:#111;
    border: 0;
    border-radius: 0;
    height: 28px;

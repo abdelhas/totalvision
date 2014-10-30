@@ -4,7 +4,8 @@
     "bounds": "-180,-85.0511,180,85.0511", 
     "minzoom": "0", 
     "version": "1.0.0", 
-    "template": "", 
+    "template": "{{#__location__}}{{/__location__}}{{#__teaser__}}{{{zone}}}{{{NAME}}}{{{STATEFP}}}{{/__teaser__}}{{#__full__}}{{{zone}}}{{{NAME}}}{{{STATEFP}}}{{/__full__}}", 
     "maxzoom": "8", 
-    "name": "2099Hardiness"
+    "legend": "", 
+    "name": "Regr2041"
 }

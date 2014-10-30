@@ -12,6 +12,8 @@ Köppen-Geiger climate classification was used to apply regression on areas with
 
 netCDF data from NEX-DCP30 Tasmin average of coldest month of the year were averaged at 30 years intervals prior to 2012 and to each predicted hardiness map year: 2041, 2070, 2099. 
 
+A Node.js script was used to collect and clean plant hardiness data from the National Gardening Assiciation Plantfinder tool.  
+
 ## Datasets used: 
 <div class='legend-source'>Source: <a href="https://cds.nccs.nasa.gov/nex/">NASA Earth Exchange (NEX) Downscaled Climate Projections (NEX-DCP30)</a>, <a href="http://planthardiness.ars.usda.gov/PHZMWeb/">USDA Plant Hardiness Zone Map</a>, and <a href="http://www.garden.org/plantfinder/">National Gardening Association PlantFinder</a>, and <a href="http://people.eng.unimelb.edu.au/mpeel/koppen.html">Köppen-Geiger climate map</a></div>
 
@@ -22,7 +24,3 @@ npm install
 
 sudo node server.js
 
-At ./public/mapdata, run the following to extract tiles: 
-mb-util 2070Hardiness_111b80.mbtiles ./2070
-mb-util 2099Hardiness_794403.mbtiles ./2099
-mb-util 2041Hardiness_2af774.mbtiles ./2041

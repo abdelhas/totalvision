@@ -2,25 +2,14 @@ html, body {
     height: 100%;
     width: 100%;
         }
-   #controlBox {
-    z-index: 10;
-    width: 300px;
-    background: #000;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: 150px;
-    color: black;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    height: 300px;
-        }
   .map-control-box {
-    z-index: 5;
+    z-index: 0;
     position: absolute;
     background: #fff;
-    top: 70px;
-    left: 10px;
+    top: 25px;
+    width: 200px;
+    margin-left: -100px;
+    left: 50%;
     opacity: 0.80;
     padding: 3px 3px 3px 3px;
     border: 1px;
@@ -104,10 +93,9 @@ html, body {
    input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     background-color: #444;
-    width: 25px;
+    width: 15px;
     height: 25px;
     background: #999;
-    -webkit-transform: rotate(45deg);
     top: 75px;
     left: 25px;
     box-shadow: -1px -1px 10px -2px rgba(0, 0, 0, 0.5);
@@ -115,6 +103,7 @@ html, body {
   .selection {
    width: 100px;
    height: 28px;
+   left: 10px;
    overflow: hidden;
    background: url('http://s24.postimg.org/lyhytocf5/dropdown.png') no-repeat right #FEFEFE;
    border: #FEFEFE 1px solid;

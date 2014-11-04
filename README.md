@@ -2,7 +2,8 @@
 - Single Page Hardiness Map Viewer for the US.
 - Use the slider to choose between hardiness map projections for 2041, 2070, 2099. 
 - Type plant name or hardiness zone to find it.
-- Map Link: <a href="http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/">http://ec2-54-245-62-84.us-west-2.compute.amazonaws.com/</a>
+- Map Link: <a href="http://www.wherewillplantsgrow.com/">http://www.wherewillplantsgrow.com/</a>
+- How to use: <a href="http://www.wherewillplantsgrow.com/views/HardinessMapHelp.pdf">Link</a>
 
 ## Methods
 The regression / interpolation techniques were followed from: 

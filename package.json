@@ -4,6 +4,7 @@
   "dependencies": {
     "body-parser": "~1.4.2",
     "express": "~4.5.1",
+    "leaflet-search": "^1.5.5",
     "method-override": "~2.0.2",
     "mongodb": "^1.4.19",
     "mongoose": "~3.8.0",

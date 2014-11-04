@@ -1,6 +1,16 @@
 var map = L.map("map");
 //Default layer
 L.tileLayer('/mapdata/2012/{z}/{x}/{y}.png', { maxZoom: 5 }).addTo(map);
+// Search control
+var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+var results = new L.LayerGroup().addTo(map);
+searchControl.on("results", function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+          results.addLayer(L.marker(data.results[i].latlng));
+        };
+      });
+
 
 var overlay = L.tileLayer('/mapdata/2012/{z}/{x}/{y}.png', { maxZoom: 5 }).addTo(map);
 var range = document.getElementById('swiper');

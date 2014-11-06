@@ -728,7 +728,7 @@ L.GeoJSON.AJAX = L.GeoJSON.extend({
                                         opacity: 1,
                                         color: '#387A36',
 					dashArray: '3',
-					fillOpacity: 0.9
+					fillOpacity: 1
 					});
 				}
 				else {
@@ -743,7 +743,46 @@ L.GeoJSON.AJAX = L.GeoJSON.extend({
 				}
 			});
 		}
-	}
+	},
+	refilter2: function(func) {
+                if (typeof func !== 'function') {
+                        this.filter = false;
+                        this.eachLayer(function(a) {
+                                a.setStyle({
+                                        stroke: true,
+                                        clickable: true,
+                                        opacity: 0.9,
+                                        color: red
+                                });
+                        });
+                }
+                else {
+                        this.filter = func;
+                        this.eachLayer(function(a) {
+
+                                if (func(a.feature)) {
+                                        a.setStyle({
+                                        stroke: true,
+                                        clickable: true,
+                                        opacity: 1,
+                                        color: '#fee391',
+                                        dashArray: '3',
+                                        fillOpacity: 0.9
+                                        });
+                                }
+                                else {
+                                        a.setStyle({
+                                                stroke: false,
+                                                clickable: false,
+                                        opacity: 1,
+                                        color: '#fff',
+                                        dashArray: '3',
+                                        fillOpacity: 0.2
+                                        });
+                                }
+                        });
+                }
+        }
 });
 L.geoJson.ajax = function(geojson, options) {
 	return new L.GeoJSON.AJAX(geojson, options);

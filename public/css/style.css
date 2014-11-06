@@ -100,8 +100,11 @@ html, body {
     left: 25px;
     box-shadow: -1px -1px 10px -2px rgba(0, 0, 0, 0.5);
   }
+  .diffColor {
+     background: #2b8cbe;
+   }
   .selection {
-   width: 100px;
+   width: 150px;
    height: 28px;
    left: 10px;
    overflow: hidden;
@@ -114,7 +117,7 @@ html, body {
    }
    .selection select {
    background: transparent;
-   width: 100px;
+   width: 150px;
    font-size:15pt;
    color:#111;
    border: 0;
@@ -136,6 +139,10 @@ html, body {
     z-index:1;
     background: #;
     }
+  .plantstb tr:hover {
+    background-color: #ffff99;
+    cursor: pointer; cursor: hand;
+  }
   .my-legend {
     z-index: 5;
     position: fixed;

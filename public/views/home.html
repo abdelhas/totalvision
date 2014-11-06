@@ -30,10 +30,10 @@
                         <h4>Select Hardiness Year:</h4>
 <div class="selection" style="margin-left:15px">
 <select id='slider'>
-    <option value='2012'>2012</option>
-    <option value='2041'>2041</option>
-    <option value='2070'>2070</option>
-    <option value='2099'>2099</option>
+    <option value='2012'>2012 vs 2012</option>
+    <option value='2041'>2041 vs 2012</option>
+    <option value='2070'>2070 vs 2012</option>
+    <option value='2099'>2099 vs 2012</option>
 </select>
 </div>
 </div>
@@ -45,25 +45,27 @@
 <div style="padding: 5px 5px 5px 5px">
 <p>Type Plant Name or Hardiness Zone:   
 <br />
-<input ng-model="query[queryBy]" value="{{zone}}" ></input>
+<input ng-model="query[queryBy]" value="{{zone}}" ng-cloak></input>
 </p>
 <table>
 <tr>
-                <th style="width:120px;">Plant Name</th>
-                <th>Hardiness</th>
-            </tr>
+    <th style="width:120px;">Plant Name</th>
+    <th>Hardiness</th>
+</tr>
 
 </table>
 </div>
 </div>
 <div style="display: block; margin-top: 80px; border-style: inset; border-width: 1px;"></div>
-    <div style="position:relative;">
+    <div class="plantstb" style="position:relative;">
 	<table>
-	    <tr ng-repeat="plant in plants | filter:query | limitTo: 25" style="width:150px">
-      		<td style="width:160px padding: 0px 0px 0px 5px">{{plant.name}}</td>
-		<td>{{plant.hardiness}}</td>
+	    <tbody>
+	    <tr class="finder" ng-repeat="plant in plants | filter:query | limitTo: 25" style="width:150px">
+      		<td style="width:160px padding: 0px 0px 0px 5px" ng-cloak>{{plant.name}}</td>
+		<td ng-cloak>{{plant.hardiness}}</td>
 		<td><a href="{{'http://www.garden.org/plantfinder/index.php?q=view&id='+plant.id}}" target="_blank">Source</a></td>
 	    </tr>
+	    </tbody>
 	</table>
     </div>
 
@@ -137,7 +139,7 @@
         <!-- ANGULAR CUSTOM -->
     <script src="js/angular/angular.rangeSlider.js"></script>
     <script src="js/angular/angular-leaflet-directive.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://leaflet-cdn.s3.amazonaws.com/build/master/leaflet.js"></script>
     <script src="js/angular/leaflet.utfgrid.js"></script>
     <script src="js/controllers/app.js"></script>
     <!-- Esri Leaflet Core -->
@@ -145,6 +147,8 @@
 
     <!-- Esri Leaflet Geocoder -->
     <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.3/esri-leaflet-geocoder.js"></script>
+    <!-- Leaflet-Layerjson -->
+    <script src="js/angular/leaflet.ajax.js"></script>
     <script src="js/controllers/swipe.js"></script>
 
 </body>

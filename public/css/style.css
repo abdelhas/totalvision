@@ -5,12 +5,12 @@ html, body {
   .map-control-box {
     z-index: 0;
     position: absolute;
-    background: #fff;
+    background: #eee;
     top: 25px;
     width: 200px;
     margin-left: -100px;
     left: 50%;
-    opacity: 0.80;
+    opacity: 0.90;
     padding: 3px 3px 3px 3px;
     border: 1px;
     border-style: solid;
@@ -26,44 +26,37 @@ html, body {
    .help-box {
     z-index: 1;
     position: absolute;
-    background: #fff;
-    bottom: 75px;
+    bottom: 10px;
     margin-left: 10px;
     opacity: 0.80;
     font-size: 90%;
-    height: 180px;
-    width: 300px;
-    border: 1px;
     padding: 0px 10px 10px 10px;
-    border-style: solid;
-    border-color: #eee;
-    box-shadow: 1px 1px 0.5px #888888;
 }
   .rightMapYear {
    z-index: 1;
    position: absolute;
-   background: #fff;
    opacity: 0.8;
-   font-size: 80%;
-   margin-left: 97%;
-   top: 20px;
+   font-size: 400%;
+   font-weight: bold;
+   margin-left: 91%;
+   top: 25px;
    color: #111;
 }
   .leftMapYear {
    z-index: 1;
    position: absolute;
-   background: #fff;
    opacity: 0.8;
-   font-size: 80%;
+   font-size: 400%;
+   font-weight: bold;
    margin-left: 4%;
-   top: 20px;
+   top: 25px;
    color: #111;
 }
   .plants-filter-box {
     z-index: 0;
     position: absolute;
     background: #fff;
-    bottom: 200px;
+    bottom: 250px;
     overflow:scroll;
     top: 100px;
     opacity: 0.80;
@@ -80,33 +73,39 @@ html, body {
   .range {
   position:absolute;
   width:100%;
+  pointer-events: none;
   }
   input[type='range'] {
     -webkit-appearance: none;
-    background-color: #eee;
-    bottom: 0;
-    opacity: 0.8;
-    left: 1px;
-    height: 12px;
+    background-color: #111;
+    top: 0;
+    opacity: 1;
+    height: 25px;
   }  
 
    input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
-    background-color: #444;
-    width: 15px;
-    height: 25px;
-    background: #999;
-    top: 75px;
-    left: 25px;
-    box-shadow: -1px -1px 10px -2px rgba(0, 0, 0, 0.5);
+    background-color: #111;
+    width: 10px;
+    top: 0;
+    bottom: 0;
+    display: block;
+    min-height: 1920px;
+    pointer-events: auto;
+    background: #fff;
+    box-shadow: 1px 1px 0.5px #888888;
+    opacity: 1;
+    cursor: pointer; cursor: hand;
   }
   .diffColor {
-     background: #2b8cbe;
+     background: #636363;
+     color: #fff;
    }
   .selection {
    width: 150px;
    height: 28px;
-   left: 10px;
+   margin-left: 20px;
+   z-index: 100;
    overflow: hidden;
    background: url('http://s24.postimg.org/lyhytocf5/dropdown.png') no-repeat right #FEFEFE;
    border: #FEFEFE 1px solid;
@@ -140,15 +139,15 @@ html, body {
     background: #;
     }
   .plantstb tr:hover {
-    background-color: #ffff99;
+    background-color: #d9d9d9;
     cursor: pointer; cursor: hand;
   }
   .my-legend {
     z-index: 5;
     position: fixed;
     background: #fff;
-    bottom: 80px;
-    right: 10px;
+    bottom: 2px;
+    right: 3px;
     padding: 3px 3px 3px 3px;
     border: 1px;
     border-style: solid;
@@ -157,7 +156,6 @@ html, body {
   }
   .my-legend .legend-title {
     text-align: left;
-    margin-bottom: 8px;
     font-weight: bold;
     font-size: 90%;
     }
@@ -170,22 +168,23 @@ html, body {
   .my-legend .legend-scale ul li {
     display: block;
     float: left;
-    width: 50px;
-    margin-bottom: 6px;
+    width: 31px;
+    margin-bottom: 3px;
     text-align: center;
-    font-size: 80%;
+    font-size: 70%;
     list-style: none;
     }
   .my-legend ul.legend-labels li span {
     display: block;
     float: left;
     height: 15px;
-    width: 50px;
+    width: 31px;
     }
   .my-legend .legend-source {
     font-size: 70%;
     color: #999;
     clear: both;
+    width: 500px;
     }
   .my-legend a {
     color: #777;
@@ -194,14 +193,9 @@ html, body {
         font-size: 90%;
  }
   .my-legend span.tab{
-    padding: 0 16px; /* Or desired space*/
-    font-size: 90%;
+    padding: 0 8px; /* Or desired space*/
+    font-size: 70%;
   }
-  .range {
-     top: 5px;
-     z-index: 1;
-     position: absolute;
-   }
   div#header{
   position:absolute;
   bottom:0;
@@ -212,3 +206,77 @@ html, body {
   z-index: 120;
   opacity: 0.9;
  }
+#credits, #about {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 2%;
+  width: 100%;
+  min-height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1002; }
+  #about {
+	  padding-top: 10%;
+	  text-align: left;
+  }
+  #credits .content, #about .content {
+    min-height: 100%;
+    z-index: 1003;
+    padding-bottom: 300px;
+}
+
+#creditsClose, .aboutClose, .experience-controls li {
+  cursor: pointer; }
+.credits-title {
+	      text-align: center;
+      }
+      .credits-sub {
+	      font-size: 13px;
+      }
+
+.individual {
+  width: 100%;
+  max-width: 800px;
+  margin: 35px auto 0 auto;
+  overflow: hidden; }
+
+.fifty {
+  width: 48%;
+  margin-right: 2%;
+  float: left; }
+  .fifty.name {
+    text-align: right; }
+    .fifty.name h2,.credits-title {
+
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4; }
+  .fifty.bio {
+    width: 50%;
+    margin-right: 0;
+    text-align: left; }
+    .fifty.bio h2,.credits-sub {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 100;
+      text-align: center;
+      color: #fff;
+      line-height: 1.4; }
+      .credits-sub {
+	      font-size: 13px;
+      }
+      .credits-title {
+	      text-align: center;
+      }
+
+.aboutTrigger {
+  margin-left: 36px; }
+
+.actions {
+	font-size: 12px;
+  letter-spacing: 3px;

@@ -52,6 +52,20 @@ html, body {
    top: 25px;
    color: #111;
 }
+  .centerPlantTitle {
+   z-index: 1;
+   position: absolute;
+   opacity: 0.8;
+   font-size: 150%;
+   font-weight: bold;
+   margin-left: 4%;
+   top: 105px;
+   color: #111;
+   text-align: center;
+    width: 500px;
+    margin-left: -250px;
+    left: 50%;
+}
   .plants-filter-box {
     z-index: 0;
     position: absolute;
@@ -238,7 +252,7 @@ html, body {
 .individual {
   width: 100%;
   max-width: 800px;
-  margin: 35px auto 0 auto;
+  margin: 10px auto 0 auto;
   overflow: hidden; }
 
 .fifty {

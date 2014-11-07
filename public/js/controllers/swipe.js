@@ -50,7 +50,6 @@ function clip() {
 };
 function changeLayer() {
 	var yearSelected = $("#slider option:selected").text(); 
-	console.log('here: ' + slider.value);
 	map.removeLayer('/mapdata/2041/{z}/{x}/{y}.png');
 	map.removeLayer('/mapdata/2070/{z}/{x}/{y}.png');
 	map.removeLayer('/mapdata/2099/{z}/{x}/{y}.png');
@@ -71,11 +70,10 @@ range['oninput' in range ? 'oninput' : 'onchange'] = clip;
 slider['oninput' in slider ? 'oninput' : 'onchange'] = changeLayer;
 
 map.on('move', clip);
-map.setView([33.5,-98.35], 4);
+map.setView([38.5,-98.35], 4);
 // First time set
 clip();
 plantClick();
-plantChangeYear();
 
 function plantChangeYear() { 
 	var plantZones = $('.diffColor').children("td:eq(1)").text();
@@ -91,13 +89,11 @@ function plantChangeYear() {
                                     return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
                                 });
                         if (parseInt(slider.value) >= 2041) {
-				console.log('here1: ' + slider.value);
                         geojsonLayer2.refilter2(
                                 function(feature){
                                     return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
                                 });
                         } else {
-				console.log('here2: ' + slider.value);
                                 geojsonLayer2.refilter2(
                                 function(feature){
                                     return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
@@ -110,7 +106,7 @@ function plantChangeYear() {
 
 // On click even on plant name, get zones
 function plantClick() {
-setTimeout(function() {
+setInterval(function() {
 $(document).ready(function(){
        $('.finder').unbind().on('click', function(){
          // highlight on click
@@ -118,6 +114,8 @@ $(document).ready(function(){
 	  $(this).toggleClass("diffColor", this.clicked); 
 	  
 	  var plantZones = $(this).children("td:eq(1)").text();
+	  var plantName = $(this).children("td:eq(0)").text();
+	  $(".centerPlantTitle").text(plantName + ' Growth Zones');
 	  var zoneArrayTmp = [];
 	  zoneArrayTmp = plantZones.split(', ');
 	  geojsonLayer.addTo(map);
@@ -125,19 +123,16 @@ $(document).ready(function(){
 	  for (var i = 0; i < zoneArrayTmp.length; i++) { 
 		zoneArrayTmp[i] = zoneArrayTmp[i].replace('0', '');
 	        if (i === zoneArrayTmp.length-1) {
-			console.log('Done');
 			geojsonLayer.refilter(
 				function(feature){
                             	    return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
 				});
 			if (parseInt(slider.value) >= 2041) {
-				console.log('here3: ' + slider.value) 
 			geojsonLayer2.refilter2(
                                 function(feature){
                                     return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
                                 });
 			} else { 
-				console.log('here4: ' + slider.value)
 				geojsonLayer2.refilter(
                                 function(feature){
                                     return feature.properties.zone === zoneArrayTmp[0] || feature.properties.zone === zoneArrayTmp[1] || feature.properties.zone === zoneArrayTmp[2]|| feature.properties.zone === zoneArrayTmp[3] || feature.properties.zone === zoneArrayTmp[4] || feature.properties.zone === zoneArrayTmp[5] || feature.properties.zone === zoneArrayTmp[6] || feature.properties.zone === zoneArrayTmp[7] || feature.properties.zone === zoneArrayTmp[8] || feature.properties.zone === zoneArrayTmp[9] || feature.properties.zone === zoneArrayTmp[10] || feature.properties.zone === zoneArrayTmp[11]
@@ -153,7 +148,6 @@ $(document).ready(function(){
 
 //dehighlight
 $(".plantstb > .finder > .plantRow").click(function() {
-    console.log('clicked')
     $(this).closest("tr").siblings().removeClass("diffColor");
     $(this).parents("tr").toggleClass("diffColor", this.clicked);
 });
@@ -163,8 +157,11 @@ $(".plantRow").click(function() {
      $(this).parents("tr").toggleClass("diffColor", this.clicked);
 });
 
-
-
-
-
+//help on start
+setTimeout(function() {
+        $(document).ready(function(){
+                $('#credits').fadeIn(1000);
+	});
+}, 500);
+document.body.style.overflow = 'hidden';
 

@@ -738,7 +738,7 @@ L.GeoJSON.AJAX = L.GeoJSON.extend({
                                         opacity: 1,
                                         color: '#fff',
                                         dashArray: '3',
-                                        fillOpacity: 0.2
+                                        fillOpacity: 0
 					});
 				}
 			});
@@ -765,9 +765,9 @@ L.GeoJSON.AJAX = L.GeoJSON.extend({
                                         stroke: true,
                                         clickable: true,
                                         opacity: 1,
-                                        color: '#fee391',
+                                        color: '#662506',
                                         dashArray: '3',
-                                        fillOpacity: 0.9
+                                        fillOpacity: 1
                                         });
                                 }
                                 else {
@@ -777,7 +777,7 @@ L.GeoJSON.AJAX = L.GeoJSON.extend({
                                         opacity: 1,
                                         color: '#fff',
                                         dashArray: '3',
-                                        fillOpacity: 0.2
+                                        fillOpacity: 0
                                         });
                                 }
                         });

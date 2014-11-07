@@ -18,9 +18,6 @@
 
 </head>
 <body ng-app="MapViz">
-<div id="header"> 
-	<h1 style="color: #ffffff; margin-left:40px;"> Hardiness Map Projections For Years 2041, 2070, and 2099 </h1>
-</div>
     <div ng-controller="MapController">
     <div id="map" style="width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;"></div>
     <input id='swiper' class='range' type='range' min='0' max='1.0' step='any' />
@@ -28,7 +25,7 @@
 	    <div class="map-control-box">
 		<div ng-controller="UIController">
                         <h4>Select Hardiness Year:</h4>
-<div class="selection" style="margin-left:15px">
+<div class="selection">
 <select id='slider'>
     <option value='2012'>2012 vs 2012</option>
     <option value='2041'>2041 vs 2012</option>
@@ -40,12 +37,13 @@
 	    </div><!-- /.box --> 
 <div class="rightMapYear">2012</div>
 <div class="leftMapYear">2012</div>
+<div class="centerPlantTitle"></div>
 <div class='plants-filter-box hidden-xs'>
 <div class='legend-title'>
 <div style="padding: 5px 5px 5px 5px">
-<p>Type Plant Name or Hardiness Zone:   
+<p>Type Plant Name below (e.g. Citrus):   
 <br />
-<input ng-model="query[queryBy]" value="{{zone}}" ng-cloak></input>
+<input class="form-control" style="width:200px;" ng-model="query[queryBy]" value="{{zone}}" ng-cloak id="formGroupInputLarge" placeholder="e.g. Citrus sinensis"></input>
 </p>
 <table>
 <tr>
@@ -56,15 +54,17 @@
 </table>
 </div>
 </div>
-<div style="display: block; margin-top: 80px; border-style: inset; border-width: 1px;"></div>
+<div style="display: block; margin-top: 90px; border-style: inset; border-width: 1px;"></div>
     <div class="plantstb" style="position:relative;">
 	<table>
 	    <tbody>
-	    <tr class="finder" ng-repeat="plant in plants | filter:query | limitTo: 25" style="width:150px">
-      		<td style="width:160px padding: 0px 0px 0px 5px" ng-cloak>{{plant.name}}</td>
+	    <tr class="finder" ng-repeat="plant in plants | filter:query | limitTo: 15" style="width:150px">
+      		<div class="plantRow">
+		<td style="width:160px padding: 0px 0px 0px 5px" ng-cloak>{{plant.name}}</td>
 		<td ng-cloak>{{plant.hardiness}}</td>
 		<td><a href="{{'http://www.garden.org/plantfinder/index.php?q=view&id='+plant.id}}" target="_blank">Source</a></td>
-	    </tr>
+	    	</div>
+	     </tr>
 	    </tbody>
 	</table>
     </div>
@@ -119,13 +119,41 @@
 </div>
 
 <div class="help-box hidden-xs">
-<h4>Introduction</h4>
-<a href="/views/HardinessMapHelp.pdf" style="color: red;font-size: 140%;" target="_blank">How to use instructions (PDF)</a>
-<h4>Datasets</h4>
-<a href="https://cds.nccs.nasa.gov/nex/" target="_blank">NASA Earth Exchange (NEX) Downscaled Climate Projections (NEX-DCP30)</a>, <a href="http://planthardiness.ars.usda.gov/PHZMWeb/" target="_blank">USDA Plant Hardiness Zone Map</a>, and <a href="http://www.garden.org/plantfinder/" target="_blank">National Gardening Association PlantFinder</a>
-
-
+	<h4 id="creditsTrigger">how to use</h4><h4 id="aboutTrigger">about</h4>
 </div>
+
+
+<div id="about" class="landing flex-c">
+	<div class="content">
+		<h2 class="credits-title">ABOUT</h2>
+		<h2 class="credits-sub">
+			Plant Hardiness Zone Map is the standard by which gardeners and growers</h2><h2 class="credits-sub"> can determine which plants are most likely to thrive at a location. </h2><h2 class="credits-sub">This map is based on the average annual minimum winter temperature from the <a href="https://cds.nccs.nasa.gov/nex/" target="_blank">NASA NEX DCP-30</a> dataset</h2><h2 class="credits-sub">The goal of this web app is to show plant hardiness zones projection over </h2> <h2 class="credits-sub">the next century over 30 years intervals, and also show projected growth regions of plants and trees.</h2>
+		<h2 class="credits-sub">Code: <a href="https://github.com/abdelhas/totalvision" target="_blank">Github</a></h2>
+		<h2 class="credits-sub">Methods/Tools: <a href="http://www.wherewillplantsgrow.com/views/HardinessMapHelp.pdf" target="_blank">PDF</a></h2>	
+		<div class="individual">	
+			<h2 class="credits-title aboutClose">Close</h2> 			
+	</div>
+</div>
+</div>
+
+<div id="credits" class="landing flex-c">
+        <div class="content">
+
+                <h2 class="credits-title">HOW TO USE</h2>
+			<h2 class="credits-sub">1. Choose Hardiness Years from the dropdown menu.</h2>
+			<h2 class="credits-sub"><img src="img/helpPic1.png" alt="Help pic 1" height="85px" width="250px"></h2>
+			<h2 class="credits-sub">2. Find plant by typing its name, then click to draw its growth zones for the selected years.</h2>
+			<h2 class="credits-sub"><h2 class="credits-sub"><img src="img/helpPic2.png" alt="Help pic 2" height="130px" width="250px"></h2>
+			<h2 class="credits-sub">3. Drag the swiper across the map to compare growth zones between different years. </h2>
+			<h2 class="credits-sub"><h2 class="credits-sub"><img src="img/helpPic3.png" alt="Help pic 3" height="130px" width="250px"></h2>
+                <div class="individual">
+                        <h2 class="credits-title" id="creditsClose">Close</h2>
+        	</div>
+	</div>	
+</div>
+
+
+
 
 </div>
 </body>
@@ -150,6 +178,6 @@
     <!-- Leaflet-Layerjson -->
     <script src="js/angular/leaflet.ajax.js"></script>
     <script src="js/controllers/swipe.js"></script>
-
+    <script src="js/controllers/helpMsg.js"></script>
 </body>
 </html>

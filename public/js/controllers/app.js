@@ -58,18 +58,6 @@ app.controller("MapController", [ "$scope", "$log", "$http", "leafletData","Slid
             }
         }
     };
-angular.extend($scope, {
-	usa: {
-	    lat: 33.5,
-	    lng: -98.35,
-	    zoom: 4
-	},
-	defaults: {
-	    maxZoom: 8,
-	    tileLayer: tilesDict._2099
-	},
-	tiles: tilesDict._2012
-});
 
 
 //Station 1

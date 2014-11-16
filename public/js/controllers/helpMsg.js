@@ -2,28 +2,27 @@
     		var aboutOpen;
     		$( "#creditsTrigger" ).click(function() {
     			if(aboutOpen == true){
-    				$('#about').fadeOut(1000);
+    				$('#about').fadeOut(250);
     				aboutOpen = false;
     				}
-			console.log('Clicked')
-    			$('#credits').fadeIn(1000);
+    			$('#credits').fadeIn(250);
 
     			creditsOpen = true;
     		});
     		$( "#creditsClose" ).click(function() {
-    			$('#credits').fadeOut(1000);
+    			$('#credits').fadeOut(250);
     			creditsOpen = false;
     			} );
 		$( "#credits" ).click(function() {
-                        $('#credits').fadeOut(1000);
+                        $('#credits').fadeOut(250);
                         creditsOpen = false;
                         } );
     		$( "#aboutTrigger" ).click(function() {
     			if(creditsOpen == true) {
-    				$('#credits').fadeOut(1000); 
+    				$('#credits').fadeOut(250); 
     				creditsOpen = false;
     			}
-    			$('#about').fadeIn(1000);
+    			$('#about').fadeIn(250);
     			aboutOpen = true;
     		});
-    		$( ".aboutClose" ).click(function() {$('#about').fadeOut(1000); aboutOpen = false});
+    		$( ".aboutClose" ).click(function() {$('#about').fadeOut(250); aboutOpen = false});

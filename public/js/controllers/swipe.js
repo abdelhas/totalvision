@@ -1,6 +1,6 @@
-var map = L.map("map");
+var map = L.map("map").setView([-98, 38], 4);;
 //Default layer
-L.tileLayer('/mapdata/2012/{z}/{x}/{y}.png', { maxZoom: 5 }).addTo(map);
+L.tileLayer('/mapdata/2012/{z}/{x}/{y}.png', { maxZoom: 5, continuousWorld: true}).addTo(map);
 // Search control
 var searchControl = new L.esri.Controls.Geosearch().addTo(map);
 var results = new L.LayerGroup().addTo(map);
@@ -13,6 +13,7 @@ searchControl.on("results", function(data){
 // Geojson Panes
 var panes = map.getPanes();
 var pane = panes.altPane = L.DomUtil.create('div', 'leaflet-overlay-pane');
+
 var svg = L.svg({pane: 'altPane'});
 var overlay = L.tileLayer('/mapdata/2012/{z}/{x}/{y}.png', { maxZoom: 5 }).addTo(map);
 var range = document.getElementById('swiper');
@@ -68,7 +69,7 @@ function changeLayer() {
 
 range['oninput' in range ? 'oninput' : 'onchange'] = clip;
 slider['oninput' in slider ? 'oninput' : 'onchange'] = changeLayer;
-
+console.log(map.setView);
 map.on('move', clip);
 map.setView([38.5,-98.35], 4);
 // First time set

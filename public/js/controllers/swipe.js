@@ -69,7 +69,6 @@ function changeLayer() {
 
 range['oninput' in range ? 'oninput' : 'onchange'] = clip;
 slider['oninput' in slider ? 'oninput' : 'onchange'] = changeLayer;
-console.log(map.setView);
 map.on('move', clip);
 map.setView([38.5,-98.35], 4);
 // First time set
@@ -83,7 +82,7 @@ function plantChangeYear() {
 	geojsonLayer.addTo(map);
         geojsonLayer2.addTo(map);
 	for (var i = 0; i < zoneArrayTmp.length; i++) {
-                zoneArrayTmp[i] = zoneArrayTmp[i].replace('0', '');
+                zoneArrayTmp[i] = zoneArrayTmp[i].replace(/^0+/, '');
                 if (i === zoneArrayTmp.length-1) {
                         geojsonLayer.refilter(
                                 function(feature){
@@ -122,7 +121,7 @@ $(document).ready(function(){
 	  geojsonLayer.addTo(map);
 	  geojsonLayer2.addTo(map);
 	  for (var i = 0; i < zoneArrayTmp.length; i++) { 
-		zoneArrayTmp[i] = zoneArrayTmp[i].replace('0', '');
+		zoneArrayTmp[i] = zoneArrayTmp[i].replace(/^0+/, '');
 	        if (i === zoneArrayTmp.length-1) {
 			geojsonLayer.refilter(
 				function(feature){

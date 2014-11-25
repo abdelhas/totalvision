@@ -23,7 +23,6 @@ app.controller('UIController', function($rootScope, $scope, $http, Slider) {
                 $scope.$watch('slider.year', function (newValue) {
                         if (newValue) {
                                 Slider.setYear(newValue);
-                                console.log('New Year: ' + newValue);
                         }
                 });
         };
@@ -66,7 +65,6 @@ $scope.$watch(function () { return Slider.getYear(); }, function (newValue) {
 		$scope.year = newValue;
 		//console.log('Ctrl 2: ' + newValue);	
 		//console.log('Tiles: ' + tiles);
-	 	console.log('Station1: ' + $scope.year);
 		$scope.tiles = tilesDict['_'+$scope.year];
 	} else {
 		tiles = 'opencyclemap';
@@ -77,7 +75,6 @@ $scope.$watch(function () { return Slider.getYear(); }, function (newValue) {
 $scope.zone = "";
 $scope.$on('leafletDirectiveMap.utfgridMouseover', function(event, leafletEvent) {
 	$scope.zone = leafletEvent.data.zone;
-	console.log($scope.zone);
 });
 
 $scope.$on('leafletDirectiveMap.utfgridMouseout', function(event, leafletEvent) {
@@ -93,9 +90,7 @@ $scope.swipe = {};
 $scope.$watch(function () { return $scope.swipe.range; }, function (newValue) {
         if (newValue) {
                 $scope.swipe.range = newValue;
-		console.log(newValue);
         } else {
-		console.log('Nothing');
         };
 });	
     $scope.query = {}
